@@ -417,3 +417,79 @@ linklist& union_elem_TO_A(linklist& A, linklist& B) {
 }
 
 
+void Create_have_no_head_List(linklist& l) {
+	//头插法
+	l = nullptr;
+	lnode* s =new lnode;
+	lnode* r = l;
+	int a[5] = { 2,1,3,4,1 };
+	int n = 5;
+	s->data = a[0];
+	s->next = l;
+	l = s ;
+	if (n == 1) {
+		r->next = nullptr;
+	}
+	else {
+		for (int i = 1; i < n; i++) {
+			s = new lnode;
+			s->data = a[i];
+			s->next = l;
+			l = s;
+		}
+	}
+}
+void Create_have_no_head_List_2(linklist& l) {
+	//尾插法
+	lnode* s;
+	lnode* r = l = new lnode;
+	int a[5] = { 2,1 };
+	int n = 2;
+	r->data = a[0];
+	if (n == 1) {
+		r->next = nullptr;
+	}
+	else {
+		for (int i = 1; i < n; i++) {
+			s = new lnode;
+			s->data = a[i];
+			r->next = s;
+			r = r->next;
+		}
+		r->next = nullptr;
+	}
+}
+void list_show(linklist l) {
+	lnode* p = l;
+	while (p) {
+		std::cout << p->data << " ";
+		p = p->next;
+	}
+	std::cout << std::endl;
+}
+
+//判断无头结点的单链表是否为回文
+bool isPalindrome(linklist head) {
+	lnode* p = head;
+	lnode* q = head;
+	linklist t = nullptr;
+	while (q) {
+		lnode* s = new lnode;
+		s->data = q->data;
+		s->next = t;
+		t = s;
+		q = q->next;
+	}
+	
+	lnode* r = t;
+	while (p != r && r->next != p) {
+		if (p->data == r->data) {
+			r = r->next;
+			p = p->next;
+		}
+		else {
+			return false;
+		}
+	}
+	return true;
+}
